@@ -2,10 +2,10 @@ package com.example.carrental.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import java.time.LocalDate;
+import com.example.carrental.model.Rental;
 import com.example.carrental.Service.RentalService;
 
-import com.example.carrental.model.Rental;
+import java.util.List;
 
 @RestController
 @RequestMapping("/rentals")
@@ -14,9 +14,17 @@ public class RentalController {
     private RentalService rentalService;
 
     @PostMapping("/book")
-    public Rental rentCar(@RequestParam String userId, @RequestParam String carId,
-                          @RequestParam String startDate, @RequestParam String endDate) {
-        return rentalService.rentCar(userId, carId, LocalDate.parse(startDate), LocalDate.parse(endDate));
+    public Rental bookCar(@RequestBody Rental rental) {
+        return rentalService.bookCar(rental);
+    }
+
+    @GetMapping("/all")
+    public List<Rental> getAllRentals() {
+        return rentalService.getAllRentals();
+    }
+
+    @GetMapping("/{userId}")
+    public List<Rental> getUserRentals(@PathVariable String userId) {
+        return rentalService.getUserRentals(userId);
     }
 }
-
