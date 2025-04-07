@@ -2,30 +2,38 @@ package com.example.carrental.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+// import com.example.carrental.model.Rental;
+import java.util.List;
 
 @Document(collection = "cars")
 public class Car {
     @Id
     private String id;
     private String model;
-    private String status; // AVAILABLE or RENTED
-    private double pricePerDay;
+    private List<Rental> bookings;
+    
+    private double pricePerHour;
+    private String image;
 
     public Car() {}
 
-    public Car(String model, String status, double pricePerDay) {
+    public Car(String model,List<Rental> bookings,  double pricePerHour,String image) {
         this.model = model;
-        this.status = status;
-        this.pricePerDay = pricePerDay;
+        this.bookings=bookings;
+        this.pricePerHour = pricePerHour;
+        this.image=image;
+
     }
 
     public String getId() { return id; }
     public String getModel() { return model; }
-    public String getStatus() { return status; }
-    public double getPricePerDay() { return pricePerDay; }
+    public List<Rental> getBookings(){ return bookings;}
+    public double getPricePerDay() { return pricePerHour; }
+    public String getImage(){ return image;}
 
     public void setId(String id) { this.id = id; }
     public void setModel(String model) { this.model = model; }
-    public void setStatus(String status) { this.status = status; }
-    public void setPricePerDay(double pricePerDay) { this.pricePerDay = pricePerDay; }
+    public void setBookings(List<Rental> bookings){ this.bookings=bookings;}
+    public void setImage(String image){ this.image=image;}
+    public void setPricePerDay(double pricePerHour) { this.pricePerHour = pricePerHour;}
 }

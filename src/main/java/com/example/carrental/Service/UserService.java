@@ -18,4 +18,7 @@ public class UserService {
     public List<User> getAllUsers() {
         return userRepository.findAll(); // Ensure this method exists in UserRepository
     }
+    public User getUser(String email) {
+        return userRepository.findByEmail(email);
+    }
 }

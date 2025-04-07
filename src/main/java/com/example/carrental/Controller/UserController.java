@@ -22,4 +22,16 @@ public class UserController {
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
+
+    @PostMapping("/login")
+    public User loginUser(@RequestBody User user) {
+        User u = userService.getUser(user.getEmail());
+        if (u == null) {
+            return null;
+        }
+        if (u.getPassword().equals(user.getPassword())) {
+            return u;
+        }
+        return null;
+    }
 }
