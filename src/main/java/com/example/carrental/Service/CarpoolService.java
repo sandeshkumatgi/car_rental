@@ -58,4 +58,8 @@ public class CarpoolService {
         carpool.setStatus(status);
         return carpoolRepository.save(carpool);
     }
+
+    public void deleteCarpool(String carpoolId) {
+        carpoolRepository.deleteById(carpoolId); // Ensure this method exists
+    }
 }

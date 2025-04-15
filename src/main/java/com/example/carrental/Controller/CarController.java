@@ -28,4 +28,14 @@ public class CarController {
     public Car getUserRentals(@PathVariable String carId) {
         return carService.getCarById(carId);
     }
+
+    @DeleteMapping("/delete/{carId}")
+    public void deleteCar(@PathVariable String carId) {
+        carService.deleteCar(carId);
+    }
+
+    @PutMapping("/{carId}/price/{newPrice}")
+    public Car updateCarPrice(@PathVariable String carId, @PathVariable double newPrice) {
+        return carService.updateCarPrice(carId, newPrice);
+    }
 }

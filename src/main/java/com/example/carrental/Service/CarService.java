@@ -24,4 +24,14 @@ public class CarService {
         return carRepository.findById(carId).orElse(null); // Ensure this method exists
     }
     
+    public void deleteCar(String carId) {
+        carRepository.deleteById(carId); // Ensure this method exists
+    }
+
+    public Car updateCarPrice(String carId, double newPrice) {
+        Car car = carRepository.findById(carId)
+                .orElseThrow(() -> new RuntimeException("Car not found with id: " + carId));
+        car.setPricePerDay(newPrice);
+        return carRepository.save(car);
+    }
 }

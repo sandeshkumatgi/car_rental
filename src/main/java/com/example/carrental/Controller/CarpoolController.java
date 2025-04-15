@@ -51,4 +51,9 @@ public class CarpoolController {
     public Carpool updateCarpoolStatus(@PathVariable String carpoolId, @PathVariable String status) {
         return carpoolService.updateCarpoolStatus(carpoolId, status);
     }
+
+    @DeleteMapping("/delete/{carpoolId}")
+    public void deleteCarpool(@PathVariable String carpoolId) {
+        carpoolService.deleteCarpool(carpoolId);
+    }
 }
