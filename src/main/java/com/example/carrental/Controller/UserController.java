@@ -5,7 +5,9 @@ import org.springframework.web.bind.annotation.*;
 import com.example.carrental.model.User;
 import com.example.carrental.Service.UserService;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/users")
@@ -13,9 +15,21 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/register")
-    public User registerUser(@RequestBody User user) {
-        return userService.registerUser(user);
+   @PostMapping("/register")
+    public Map<String, Object> registerUser(@RequestBody User user) {
+        Map<String, Object> response = new HashMap<>();
+        User existingUser = userService.getUser(user.getEmail());
+
+        if (existingUser != null) {
+            response.put("message", "already registered");
+            response.put("user", new User()); // empty user object
+            return response;
+        }
+
+        User savedUser = userService.registerUser(user);
+        response.put("message", "success");
+        response.put("user", savedUser);
+        return response;
     }
 
     @GetMapping("/all")
