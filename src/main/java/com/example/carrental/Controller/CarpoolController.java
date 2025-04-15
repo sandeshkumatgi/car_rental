@@ -47,8 +47,8 @@ public class CarpoolController {
         return carpoolService.leaveCarpool(carpoolId, userId);
     }
 
-    @PutMapping("/{carpoolId}/status")
-    public Carpool updateCarpoolStatus(@PathVariable String carpoolId, @RequestParam String status) {
+    @PutMapping("/{carpoolId}/status/{status}")
+    public Carpool updateCarpoolStatus(@PathVariable String carpoolId, @PathVariable String status) {
         return carpoolService.updateCarpoolStatus(carpoolId, status);
     }
 }

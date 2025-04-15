@@ -24,5 +24,8 @@ public class CarController {
         return carService.getAllCars();
     }
 
-   
+    @GetMapping("/{carId}")
+    public Car getUserRentals(@PathVariable String carId) {
+        return carService.getCarById(carId);
+    }
 }

@@ -20,6 +20,8 @@ public class CarService {
     public List<Car> getAllCars() {
         return carRepository.findAll(); // Ensure this method exists
     }
-
+    public Car getCarById(String carId) {
+        return carRepository.findById(carId).orElse(null); // Ensure this method exists
+    }
     
 }
