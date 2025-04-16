@@ -48,4 +48,30 @@ public class UserController {
         }
         return null;
     }
+    @PostMapping("/initialize-admin")
+    public Map<String, String> initializeAdminSingleton(@RequestParam String email) {
+        Map<String, String> response = new HashMap<>();
+        try {
+            userService.initializeAdminSingleton(email);
+            response.put("message", "Admin singleton initialized.");
+        } catch (Exception e) {
+            response.put("error", e.getMessage());
+        }
+        return response;
+    }
+
+    @GetMapping("/admin")
+    public Map<String, Object> getAdminFromSingleton() {
+        Map<String, Object> response = new HashMap<>();
+        User admin = userService.getAdminFromSingleton();
+        if (admin == null) {
+            response.put("message", "Admin singleton not initialized.");
+            response.put("admin", new User()); // empty fallback
+        } else {
+            response.put("message", "Admin retrieved successfully.");
+            response.put("admin", admin);
+        }
+        return response;
+    }
+
 }
